@@ -77,37 +77,5 @@ function closePopup() {
   document.getElementById('TAC').style.display = 'none';
 }
 
-const cursorCount = 50;
-const trail = [];
-
-for (let i = 0; i < cursorCount; i++) {
-  const cursor = document.createElement('div');
-  cursor.className = 'cursor';
-  document.body.appendChild(cursor);
-  trail.push({ x: 0, y: 0 });
-}
-
-document.addEventListener('mousemove', (event) => {
-  const mouseX = event.clientX;
-  const mouseY = event.clientY;
-
-  // Update trail positions
-  trail.pop();
-  trail.unshift({ x: mouseX, y: mouseY });
-
-  const cursors = document.querySelectorAll('.cursor');
-
-  cursors.forEach((cursor, index) => {
-    const targetIndex = Math.min(index * 5, trail.length - 1);
-    const target = trail[targetIndex];
-
-    // Interpolate between current position and target position for a smoother movement
-    const newX = cursor.offsetLeft + (target.x - cursor.offsetLeft) * 0.2;
-    const newY = cursor.offsetTop + (target.y - cursor.offsetTop) * 0.2;
-
-    cursor.style.left = newX + 'px';
-    cursor.style.top = newY + 'px';
-  });
-});
 
 
